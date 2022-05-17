@@ -1,8 +1,9 @@
 var burg = document.getElementById("burger");
-var startButton = document.getElementById("stButton");
-var gameArea = document.getElementById("gameWindow")
-
-console.log(burg.offsetLeft)
+var bottomBun = document.querySelector("#bun-bottom");
+var startButton = document.querySelector("#stButton");
+console.log(startButton)
+var gameArea = document.querySelector("#gameWindow")
+console.log(gameArea)
 
 console.log(document.getElementById("pipe-1").offsetLeft);
 pipe1Left = document.getElementById("pipe-1").offsetLeft
@@ -23,6 +24,7 @@ var startPos = 0
 burg.style.left = locArr[startPos]+"px";
 
 
+
 const patty = document.createElement("div");
 patty.setAttribute("id","patty");
 patty.style.position = "absolute";
@@ -32,25 +34,52 @@ patty.style.height = "10px";
 patty.style.width = "90px";
 patty.style.marginLeft = "15px";
 patty.style.backgroundColor = "rgb(56, 38, 26)";
-console.log(patty.style.left)
-console.log(burg.style.left)
-gameArea.appendChild(patty)
-console.log("patty generated");
+//console.log("Patty left pos " + patty.style.left)
+//console.log( "burger xpos " + burg.style.left)
+//gameArea.appendChild(patty)
+//patty.style.display = "none";
 
+/*burg.appendChild(patty);
+patty.style.position = "absolute";
+patty.style.left = "0px"
+patty.style.marginLeft = "5px"
+patty.style.top = "80%";*/
 
-//var gameStart = false;
+const tomato = document.createElement("div");
+tomato.setAttribute("id","tomato");
+tomato.style.position = "absolute";
+tomato.style.left = locArr[0]+"px";
+tomato.style.top = "50px";
+tomato.style.height = "10px";
+tomato.style.width = "50px";
+tomato.style.marginLeft = "35px";
+tomato.style.backgroundColor = "red";
 
+const cheese = document.createElement("div");
+cheese.setAttribute("id","cheese");
+cheese.style.position = "absolute";
+cheese.style.left = locArr[0]+"px";
+cheese.style.top = "50px";
+cheese.style.height = "5px";
+cheese.style.width = "70px";
+cheese.style.marginLeft = "25px";
+cheese.style.backgroundColor = "orange";
+
+let ingredients=[patty, cheese, tomato]
+
+burgArr = [bottomBun]
 
 document.onkeydown = moveBurg;
 function moveBurg(e) {
-    var posLeft = burg.offsetLeft;
     e = e || window.event;
     if (e.keyCode == '37' && startPos != 0) {
         // left arrow
         burg.style.left = locArr[startPos-1]+"px";
         startPos -= 1
         console.log("leftpress")
-        console.log(posLeft)
+        console.log("burg offset " + burg.offsetLeft)
+        console.log("locArr[startPos]" + locArr[startPos])
+        console.log((burg.offsetLeft-10)===locArr[startPos])
         //bottomBun.style.left  = 100+"px";
         //console.log(bottomBun.style.left)
     }
@@ -58,7 +87,9 @@ function moveBurg(e) {
         burg.style.left = locArr[startPos+1]+"px";
         startPos += 1
         console.log("rightpress")
-        console.log(posLeft)
+        console.log("burg offset " + burg.offsetLeft)
+        console.log("locArr[startPos]" + locArr[startPos])
+        console.log((burg.offsetLeft-10)===locArr[startPos])
 
         // right arrow
         //bottomBun.style.left  = (posLeft+10)+"px";
@@ -70,22 +101,72 @@ function moveBurg(e) {
 }
 
 
-function dropIngredients(){
-    var ingredient = patty
+function startGame(){
+    var ingredient = ingredients[Math.floor(Math.random()*(ingredients.length))]
+    //var ingredient = patty
+    console.log("ingredient= " + ingredient.getAttribute("id"))
+    //ingredient.style.display = "block";
+    gameArea.appendChild(ingredient)
     var yPos = 50;
-    var xPos = locArr[Math.floor(Math.random()*(locArr.length-1))]+"px"
+    var randomLoc = locArr[Math.floor(Math.random()*(locArr.length))]
+    var xPos = randomLoc+"px"
+    console.log("array" + randomLoc)
+    console.log("xpos" + xPos)
+    var ingredientPos = locArr.indexOf(randomLoc)
+    console.log("ingredientPos ",ingredientPos)
     console.log(xPos)
     ingredient.style.left = xPos;
-    id = setInterval(frame, 5) 
-    function frame(){
-        if (yPos==gameArea.bottom){
+    id = setInterval(drop, 5) 
+    function drop(){
+        if (yPos===gameArea.offsetHeight && burg.offsetLeft-10===randomLoc){
+            //console.log(tomato.style.height)
+            burgArr.push(ingredient);
+            var lastCaught = burgArr[burgArr.length-1]
+            console.log(burgArr)
+            let ingr = ""
+            let ingrHeight = 0
+            burgArr.forEach(element => {
+                console.log(element, element.style.height)
+                ingr = element.style.height.replace("px","")
+                if(ingr==''){
+                    ingr=0;
+                }
+                console.log(ingr)
+                ingrHeight += parseInt(ingr)
+            });
+            console.log(ingrHeight)
+            var positionHeight = ingredient.style.height.replace("px","")
+            var positionTop = 90 - parseInt(ingrHeight)
+            var ingrWidth = ingredient.style.width.replace("px","")
+            var positionWidth = (100 - parseInt(ingrWidth))/2
+            console.log("positionTop", positionTop)
             clearInterval(id)
             console.log("loop end")
+            yPos = 50
+            //ingredient.style.position="absolute";
+            //ingredient.style.display = "none"
+            console.log((burg.offsetLeft-10)===randomLoc)
+
+            burg.appendChild(lastCaught)
+            console.log("burgArr", burgArr)
+            lastCaught.style.position = "absolute";
+            lastCaught.style.left = "0px"
+            lastCaught.style.marginLeft = positionWidth+"px";
+            lastCaught.style.top = positionTop+"px";
+            
         }
         else{
             yPos++;
             ingredient.style.top = yPos+"px"
-            console.log(yPos)
         }
     }
 }
+
+console.log("gameArea " + gameArea.offsetHeight)
+
+
+startButton.addEventListener("click", startGame)
+
+
+
+//dropIngredients()
