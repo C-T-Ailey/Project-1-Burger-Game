@@ -1,5 +1,6 @@
-burg = document.getElementById("burger");
-startButton = document.getElementById("stButton");
+var burg = document.getElementById("burger");
+var startButton = document.getElementById("stButton");
+var gameArea = document.getElementById("gameWindow")
 
 console.log(burg.offsetLeft)
 
@@ -21,11 +22,27 @@ var startPos = 0
 
 burg.style.left = locArr[startPos]+"px";
 
+
+const patty = document.createElement("div");
+patty.setAttribute("id","patty");
+patty.style.position = "absolute";
+patty.style.left = locArr[0]+"px";
+patty.style.top = "50px";
+patty.style.height = "10px";
+patty.style.width = "90px";
+patty.style.marginLeft = "15px";
+patty.style.backgroundColor = "rgb(56, 38, 26)";
+console.log(patty.style.left)
+console.log(burg.style.left)
+gameArea.appendChild(patty)
+console.log("patty generated");
+
+
 //var gameStart = false;
 
 
-document.onkeydown = detectKey;
-function detectKey(e) {
+document.onkeydown = moveBurg;
+function moveBurg(e) {
     var posLeft = burg.offsetLeft;
     e = e || window.event;
     if (e.keyCode == '37' && startPos != 0) {
@@ -52,3 +69,23 @@ function detectKey(e) {
     }
 }
 
+
+function dropIngredients(){
+    var ingredient = patty
+    var yPos = 50;
+    var xPos = locArr[Math.floor(Math.random()*(locArr.length-1))]+"px"
+    console.log(xPos)
+    ingredient.style.left = xPos;
+    id = setInterval(frame, 5) 
+    function frame(){
+        if (yPos==gameArea.bottom){
+            clearInterval(id)
+            console.log("loop end")
+        }
+        else{
+            yPos++;
+            ingredient.style.top = yPos+"px"
+            console.log(yPos)
+        }
+    }
+}
