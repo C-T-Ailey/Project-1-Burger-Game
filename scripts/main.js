@@ -1,3 +1,30 @@
+function range(num1,num2){
+    arr = []
+    if(num1>num2){
+        return "First argument must be less than second.";
+    }
+    else {
+        for (i=num1; i<=num2-1; i++){
+            arr.push(i);
+        }
+    }
+    return arr;
+}
+
+function areEqual(array1, array2) {
+    if (array1.length === array2.length) {
+      return array1.every((element, index) => {
+        if (element === array2[index]) {
+          return true;
+        }
+  
+        return false;
+      });
+    }
+  
+    return false;
+  }
+
 var burg = document.getElementById("burger");
 var bottomBun = document.querySelector("#bun-bottom");
 var startButton = document.querySelector("#stButton");
@@ -5,16 +32,16 @@ var startButton = document.querySelector("#stButton");
 var gameArea = document.querySelector("#gameWindow")
 //console.log(gameArea)
 
-console.log(document.getElementById("pipe-1").offsetLeft);
+//console.log(document.getElementById("pipe-1").offsetLeft);
 pipe1Left = document.getElementById("pipe-1").offsetLeft
 
-console.log(document.getElementById("pipe-2").offsetLeft);
+//console.log(document.getElementById("pipe-2").offsetLeft);
 pipe2Left = document.getElementById("pipe-2").offsetLeft
 
-console.log(document.getElementById("pipe-3").offsetLeft);
+//console.log(document.getElementById("pipe-3").offsetLeft);
 pipe3Left = document.getElementById("pipe-3").offsetLeft
 
-console.log(document.getElementById("pipe-4").offsetLeft);
+//console.log(document.getElementById("pipe-4").offsetLeft);
 pipe4Left = document.getElementById("pipe-4").offsetLeft
 
 locArr = [pipe1Left,pipe2Left,pipe3Left,pipe4Left];
@@ -134,32 +161,28 @@ function moveBurg(e) {
 
 
 function startGame(){
+    startButton.style.display = "none";     //Hide the start button
     console.log("")
-    currentLevel = levelIngredients.level1
-    console.log("current ingredients:", currentLevel)
-
-
-    /*function stackHeight(){
-        burgArr.forEach(element => {
-            console.log(element.style.height)
-        });
-    }*/
+    currentLevel = levelIngredients.level1      //Set the ingredients array for the current level
+    
+    
+    //console.log("current ingredients:", currentLevel)
     
     function rollIngredient(){
         return currentLevel[Math.floor(Math.random()*(currentLevel.length))];
-    }
+    }      // Generate the ingredient to drop
 
-    function rollPipeLocation(){
+    function rollDropLocation(){
         return locArr[Math.floor(Math.random()*(locArr.length))];
-    }
+    }       // Generate the pipe to drop ingredient from
     
     var ingredient = rollIngredient();
     //var ingredient = patty
-    console.log("ingredient= " + ingredient.getAttribute("id"))
+    //console.log("ingredient= " + ingredient.getAttribute("id"))
     //ingredient.style.display = "block";
     
-    var yPos = 50;
-    var randomLoc = rollPipeLocation();
+    var yPos = 50;  // Starting position of the element to drop (px from top of screen)
+    var randomLoc = rollDropLocation();
     var xPos = randomLoc+"px";
     
     //ingredient.style.left = xPos;
@@ -169,27 +192,88 @@ function startGame(){
     //var ingredientPos = locArr.indexOf(randomLoc)
     //console.log("ingredientPos ",ingredientPos)
     //console.log(xPos)
-    
-    let caught = false;
+    var catchCap = gameArea.offsetHeight-100;
+    var catchZone = range(catchCap,gameArea.offsetHeight);
+    var levelFinished = false;
+
     var id = setInterval(drop, 5) 
     function drop(){
         do {
             gameArea.appendChild(ingredient);
-            yPos++;
+            yPos+=2;
+            //console.log(catchCap)
+            //console.log(gameArea.offsetHeight)
             ingredient.style.top = yPos+"px"
             ingredient.style.left = xPos;
-            if(yPos===gameArea.offsetHeight && burg.offsetLeft-10!=randomLoc){
+            if(yPos >= gameArea.offsetHeight && burg.offsetLeft-10!=randomLoc){
                 console.log("Not caught!");
                 yPos = 50;
                 ingredient = rollIngredient()
-                randomLoc = rollPipeLocation()
+                randomLoc = rollDropLocation()
                 xPos = randomLoc+"px";
                 console.log ("rerolled ingredient: ", ingredient.getAttribute("id"))
                 console.log("rerolled location: ", xPos)
             }
-        } while (caught = false);  
-        
-        if (yPos===gameArea.offsetHeight && burg.offsetLeft-10===randomLoc){
+            else if (catchZone.includes(yPos) && burg.offsetLeft-10===randomLoc){
+                console.log("Caught!")
+                burgArr.push(ingredient);
+                console.log(burgArr)
+                let ingr = ""
+                let ingrHeight = 0
+                burgArr.forEach(element => {
+                    ingr = element.style.height.replace("px","")
+                    if(ingr==''){
+                        ingr=0;
+                    }
+                    ingrHeight += parseInt(ingr)
+                });
+                var positionHeight = ingredient.style.height.replace("px","")
+                var positionTop = 90 - parseInt(ingrHeight)
+                var ingrWidth = ingredient.style.width.replace("px","")
+                var positionWidth = (100 - parseInt(ingrWidth))/2
+                clearInterval(id)
+                console.log("loop end")
+                yPos = 50
+                console.log((burg.offsetLeft-10)===randomLoc)
+
+                burg.appendChild(ingredient)
+                console.log(ingredient)
+                console.log("burgArr", burgArr)
+                ingredient.style.position = "absolute";
+                ingredient.style.left = "0px";
+                ingredient.style.marginLeft = positionWidth+"px";
+                ingredient.style.top = positionTop+"px";
+                let removeIndex = currentLevel.indexOf(ingredient)
+                currentLevel.splice(removeIndex,1);
+                console.log("after splice: ", currentLevel)
+                //startButton.style.display = "inline-block";
+                if (currentLevel.length > 0) {
+                    startGame()
+                    console.log("new loop")
+                } else {
+                    levelFinished = true;
+                    console.log("Level finished!")
+                    clearInterval(id)
+                    if(areEqual(target.level1, burgArr)===true){
+                        console.log("Congratulations! You got the order right.")
+                        startButton.style.display = "inline-block";
+                        startButton.innerHTML = "You got the order right!<br>Next Level"
+                    } else {
+                        console.log("You messed up, man! You're fired!")
+                        console.log(burgArr)
+                        burgArr = [bottomBun]
+                        currentLevel = levelIngredients.level1
+                        console.log(currentLevel)
+                        
+                        startButton.style.display = "inline-block";
+                        startButton.innerHTML = "You got the order wrong!<br>Start Again"
+
+                    }
+                }
+            }
+        } while (levelFinished = false); 
+
+        /*if (catchZone.includes(yPos) && burg.offsetLeft-10===randomLoc){
             //console.log(tomato.style.height)
             burgArr.push(ingredient);
             //var ingredient = burgArr[burgArr.length-1]
@@ -225,13 +309,13 @@ function startGame(){
             ingredient.style.left = "0px";
             ingredient.style.marginLeft = positionWidth+"px";
             ingredient.style.top = positionTop+"px";
-            console.log("index of ingredient to be removed: ", currentLevel.indexOf(ingredient))
             let removeIndex = currentLevel.indexOf(ingredient)
             currentLevel.splice(removeIndex,1);
-            console.log(typeof currentLevel)
             console.log("after splice: ", currentLevel)
+            startButton.style.display = "inline-block";
             //caught = true;
         }
+        
 
 
         /*else if (yPos===gameArea.offsetHeight && burg.offsetLeft-10!=randomLoc) {

@@ -22,9 +22,13 @@ html, body {
 
 #startDiv {
     position: absolute;
-    left: 35%;
-    top: 50%;
-    z-index: 1;
+    left: 45%;
+    top: 45%;
+}
+
+#stButton {
+    width: 200px;
+    height: 50px;
 }
 
 #orderUp {
@@ -89,7 +93,7 @@ html, body {
     margin-left: 10px;
     height: 100px;
     width: 100px;
-    background-color: green;
+    background-color: transparent;
 }
 
 #bun-bottom {
