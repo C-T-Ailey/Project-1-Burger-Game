@@ -1,9 +1,9 @@
 var burg = document.getElementById("burger");
 var bottomBun = document.querySelector("#bun-bottom");
 var startButton = document.querySelector("#stButton");
-console.log(startButton)
+//console.log(startButton)
 var gameArea = document.querySelector("#gameWindow")
-console.log(gameArea)
+//console.log(gameArea)
 
 console.log(document.getElementById("pipe-1").offsetLeft);
 pipe1Left = document.getElementById("pipe-1").offsetLeft
@@ -65,7 +65,38 @@ cheese.style.width = "70px";
 cheese.style.marginLeft = "25px";
 cheese.style.backgroundColor = "orange";
 
-let ingredients=[patty, cheese, tomato]
+const lettuce = document.createElement("div");
+lettuce.setAttribute("id","lettuce");
+lettuce.style.position = "absolute";
+lettuce.style.left = locArr[0]+"px";
+lettuce.style.top = "50px";
+lettuce.style.height = "5px";
+lettuce.style.width = "85px";
+lettuce.style.marginLeft = "17px";
+lettuce.style.backgroundColor = "lawngreen";
+
+const topBun = document.createElement("div");
+topBun.setAttribute("id","topBun");
+topBun.style.position = "absolute";
+topBun.style.top = "35px";
+topBun.style.marginLeft = "10px";
+topBun.style.height = "20px";
+topBun.style.width = "100px";
+topBun.style.borderRadius = "150px 150px 0 0";
+topBun.style.backgroundColor = "rgb(232, 167, 83)";
+
+
+
+let ingredients=[patty, cheese, tomato, lettuce, topBun]
+let levelIngredients = {
+    level1: [patty, cheese, tomato, lettuce, topBun],
+    level2: [patty, patty, lettuce, lettuce, cheese, topBun]
+}
+let arr = []
+const target = {
+    level1: [bottomBun, patty, cheese, lettuce, tomato, topBun],
+    level2: [bottomBun, lettuce, patty, cheese, lettuce, patty, cheese, topBun]
+}
 
 burgArr = [bottomBun]
 
@@ -77,69 +108,109 @@ function moveBurg(e) {
         burg.style.left = locArr[startPos-1]+"px";
         startPos -= 1
         console.log("leftpress")
-        console.log("burg offset " + burg.offsetLeft)
-        console.log("locArr[startPos]" + locArr[startPos])
-        console.log((burg.offsetLeft-10)===locArr[startPos])
+        //console.log("burg offset " + burg.offsetLeft)
+        //console.log("locArr[startPos]" + locArr[startPos])
+        //console.log((burg.offsetLeft-10)===locArr[startPos])
         //bottomBun.style.left  = 100+"px";
         //console.log(bottomBun.style.left)
     }
     else if (e.keyCode == '39' && startPos != 3) {
         burg.style.left = locArr[startPos+1]+"px";
         startPos += 1
-        console.log("rightpress")
-        console.log("burg offset " + burg.offsetLeft)
-        console.log("locArr[startPos]" + locArr[startPos])
-        console.log((burg.offsetLeft-10)===locArr[startPos])
+        //console.log("rightpress")
+        //console.log("burg offset " + burg.offsetLeft)
+        //console.log("locArr[startPos]" + locArr[startPos])
+        //console.log((burg.offsetLeft-10)===locArr[startPos])
 
         // right arrow
         //bottomBun.style.left  = (posLeft+10)+"px";
         //console.log(bottomBun.style.left)
     }
-    else if (startPos === 0 || startPos === 3){
+    else if ((e.keyCode == '37' || e.keyCode == '39') && (startPos === 0 || startPos === 3)){
         console.log("You're at the end of the counter! You'll drop the burger!")
     }
 }
 
 
+
 function startGame(){
-    var ingredient = ingredients[Math.floor(Math.random()*(ingredients.length))]
+    console.log("")
+    currentLevel = levelIngredients.level1
+    console.log("current ingredients:", currentLevel)
+
+
+    /*function stackHeight(){
+        burgArr.forEach(element => {
+            console.log(element.style.height)
+        });
+    }*/
+    
+    function rollIngredient(){
+        return currentLevel[Math.floor(Math.random()*(currentLevel.length))];
+    }
+
+    function rollPipeLocation(){
+        return locArr[Math.floor(Math.random()*(locArr.length))];
+    }
+    
+    var ingredient = rollIngredient();
     //var ingredient = patty
     console.log("ingredient= " + ingredient.getAttribute("id"))
     //ingredient.style.display = "block";
-    gameArea.appendChild(ingredient)
+    
     var yPos = 50;
-    var randomLoc = locArr[Math.floor(Math.random()*(locArr.length))]
-    var xPos = randomLoc+"px"
-    console.log("array" + randomLoc)
-    console.log("xpos" + xPos)
-    var ingredientPos = locArr.indexOf(randomLoc)
-    console.log("ingredientPos ",ingredientPos)
-    console.log(xPos)
-    ingredient.style.left = xPos;
-    id = setInterval(drop, 5) 
+    var randomLoc = rollPipeLocation();
+    var xPos = randomLoc+"px";
+    
+    //ingredient.style.left = xPos;
+
+    //console.log("array " + randomLoc)
+    //console.log("xpos" + xPos)
+    //var ingredientPos = locArr.indexOf(randomLoc)
+    //console.log("ingredientPos ",ingredientPos)
+    //console.log(xPos)
+    
+    let caught = false;
+    var id = setInterval(drop, 5) 
     function drop(){
+        do {
+            gameArea.appendChild(ingredient);
+            yPos++;
+            ingredient.style.top = yPos+"px"
+            ingredient.style.left = xPos;
+            if(yPos===gameArea.offsetHeight && burg.offsetLeft-10!=randomLoc){
+                console.log("Not caught!");
+                yPos = 50;
+                ingredient = rollIngredient()
+                randomLoc = rollPipeLocation()
+                xPos = randomLoc+"px";
+                console.log ("rerolled ingredient: ", ingredient.getAttribute("id"))
+                console.log("rerolled location: ", xPos)
+            }
+        } while (caught = false);  
+        
         if (yPos===gameArea.offsetHeight && burg.offsetLeft-10===randomLoc){
             //console.log(tomato.style.height)
             burgArr.push(ingredient);
-            var lastCaught = burgArr[burgArr.length-1]
+            //var ingredient = burgArr[burgArr.length-1]
             console.log(burgArr)
             let ingr = ""
             let ingrHeight = 0
             burgArr.forEach(element => {
-                console.log(element, element.style.height)
+                //console.log(element, element.style.height)
                 ingr = element.style.height.replace("px","")
                 if(ingr==''){
                     ingr=0;
                 }
-                console.log(ingr)
+                //console.log(ingr)
                 ingrHeight += parseInt(ingr)
             });
-            console.log(ingrHeight)
+            //console.log(ingrHeight)
             var positionHeight = ingredient.style.height.replace("px","")
             var positionTop = 90 - parseInt(ingrHeight)
             var ingrWidth = ingredient.style.width.replace("px","")
             var positionWidth = (100 - parseInt(ingrWidth))/2
-            console.log("positionTop", positionTop)
+            //console.log("positionTop", positionTop)
             clearInterval(id)
             console.log("loop end")
             yPos = 50
@@ -147,22 +218,35 @@ function startGame(){
             //ingredient.style.display = "none"
             console.log((burg.offsetLeft-10)===randomLoc)
 
-            burg.appendChild(lastCaught)
+            burg.appendChild(ingredient)
+            console.log(ingredient)
             console.log("burgArr", burgArr)
-            lastCaught.style.position = "absolute";
-            lastCaught.style.left = "0px"
-            lastCaught.style.marginLeft = positionWidth+"px";
-            lastCaught.style.top = positionTop+"px";
+            ingredient.style.position = "absolute";
+            ingredient.style.left = "0px";
+            ingredient.style.marginLeft = positionWidth+"px";
+            ingredient.style.top = positionTop+"px";
+            console.log("index of ingredient to be removed: ", currentLevel.indexOf(ingredient))
+            let removeIndex = currentLevel.indexOf(ingredient)
+            currentLevel.splice(removeIndex,1);
+            console.log(typeof currentLevel)
+            console.log("after splice: ", currentLevel)
+            //caught = true;
+        }
+
+
+        /*else if (yPos===gameArea.offsetHeight && burg.offsetLeft-10!=randomLoc) {
+            console.log("Not caught!")
+            yPos = 50;
             
         }
         else{
             yPos++;
             ingredient.style.top = yPos+"px"
-        }
+        }*/
     }
 }
 
-console.log("gameArea " + gameArea.offsetHeight)
+//console.log("gameArea " + gameArea.offsetHeight)
 
 
 startButton.addEventListener("click", startGame)
