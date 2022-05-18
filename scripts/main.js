@@ -73,6 +73,7 @@ patty.style.marginLeft = "5px"
 patty.style.top = "80%";*/
 
 const tomato = document.createElement("div");
+const tomato2 = document.createElement("div");
 tomato.setAttribute("id","tomato");
 tomato.style.position = "absolute";
 tomato.style.left = locArr[0]+"px";
@@ -119,7 +120,9 @@ let levelIngredients = {
     level1: [patty, cheese, tomato, lettuce, topBun],
     level2: [patty, patty, lettuce, lettuce, cheese, topBun]
 }
-let arr = []
+
+//let arr = []
+
 const target = {
     level1: [bottomBun, patty, cheese, lettuce, tomato, topBun],
     level2: [bottomBun, lettuce, patty, cheese, lettuce, patty, cheese, topBun]
@@ -159,17 +162,28 @@ function moveBurg(e) {
 }
 
 
+var currentLevel = 1;     //Set the ingredients array for the current level
 
 function startGame(){
     startButton.style.display = "none";     //Hide the start button
     console.log("")
-    currentLevel = levelIngredients.level1      //Set the ingredients array for the current level
+    console.log("Current Level: ", currentLevel)
+    function setIngredients(){
+        if (currentLevel===1){
+            console.log("level1")
+            return levelIngredients.level1;
+        }
+        else if (currentLevel===2){
+            console.log(levelIngredients.level2)
+            return levelIngredients.level2;
+        }
+    }
+    var currentIngredients = setIngredients();
+    console.log("Level ingredients: ", currentIngredients)
     
-    
-    //console.log("current ingredients:", currentLevel)
     
     function rollIngredient(){
-        return currentLevel[Math.floor(Math.random()*(currentLevel.length))];
+        return currentIngredients[Math.floor(Math.random()*(currentIngredients.length))];
     }      // Generate the ingredient to drop
 
     function rollDropLocation(){
@@ -178,7 +192,7 @@ function startGame(){
     
     var ingredient = rollIngredient();
     //var ingredient = patty
-    //console.log("ingredient= " + ingredient.getAttribute("id"))
+    //console.log("Rolled ingredient= " + ingredient.getAttribute("id"))
     //ingredient.style.display = "block";
     
     var yPos = 50;  // Starting position of the element to drop (px from top of screen)
@@ -206,18 +220,18 @@ function startGame(){
             ingredient.style.top = yPos+"px"
             ingredient.style.left = xPos;
             if(yPos >= gameArea.offsetHeight && burg.offsetLeft-10!=randomLoc){
-                console.log("Not caught!");
+                //console.log("Not caught!");
                 yPos = 50;
                 ingredient = rollIngredient()
                 randomLoc = rollDropLocation()
                 xPos = randomLoc+"px";
-                console.log ("rerolled ingredient: ", ingredient.getAttribute("id"))
-                console.log("rerolled location: ", xPos)
+                //console.log ("rerolled ingredient: ", ingredient.getAttribute("id"))
+                //console.log("rerolled location: ", xPos)
             }
             else if (catchZone.includes(yPos) && burg.offsetLeft-10===randomLoc){
-                console.log("Caught!")
+                //console.log("Caught!")
                 burgArr.push(ingredient);
-                console.log(burgArr)
+                //console.log(burgArr)
                 let ingr = ""
                 let ingrHeight = 0
                 burgArr.forEach(element => {
@@ -232,24 +246,24 @@ function startGame(){
                 var ingrWidth = ingredient.style.width.replace("px","")
                 var positionWidth = (100 - parseInt(ingrWidth))/2
                 clearInterval(id)
-                console.log("loop end")
+                //console.log("loop end")
                 yPos = 50
-                console.log((burg.offsetLeft-10)===randomLoc)
+                //console.log((burg.offsetLeft-10)===randomLoc)
 
                 burg.appendChild(ingredient)
-                console.log(ingredient)
-                console.log("burgArr", burgArr)
+                //console.log(ingredient)
+                //console.log("burgArr", burgArr)
                 ingredient.style.position = "absolute";
                 ingredient.style.left = "0px";
                 ingredient.style.marginLeft = positionWidth+"px";
                 ingredient.style.top = positionTop+"px";
-                let removeIndex = currentLevel.indexOf(ingredient)
-                currentLevel.splice(removeIndex,1);
-                console.log("after splice: ", currentLevel)
+                let removeIndex = currentIngredients.indexOf(ingredient)
+                currentIngredients.splice(removeIndex,1);
+                console.log("after splice: ", currentIngredients)
                 //startButton.style.display = "inline-block";
-                if (currentLevel.length > 0) {
+                if (currentIngredients.length > 0) {
                     startGame()
-                    console.log("new loop")
+                    //console.log("new loop")
                 } else {
                     levelFinished = true;
                     console.log("Level finished!")
@@ -258,15 +272,26 @@ function startGame(){
                         console.log("Congratulations! You got the order right.")
                         startButton.style.display = "inline-block";
                         startButton.innerHTML = "You got the order right!<br>Next Level"
+                        currentLevel += 1
+                        burgArr = [bottomBun];
+                        levelIngredients.level1 = [patty, cheese, tomato, lettuce, topBun]
+                        levelIngredients.level1.forEach(element => {
+                            burg.removeChild(element)
+                        });
+                        console.log(currentLevel)
                     } else {
                         console.log("You messed up, man! You're fired!")
-                        console.log(burgArr)
+                        startButton.innerHTML = "You got the order wrong!<br>Start Again"
+                        currentLevel = 1;
+                        //console.log(burgArr)
                         burgArr = [bottomBun]
-                        currentLevel = levelIngredients.level1
-                        console.log(currentLevel)
+                        levelIngredients.level1 = [patty, cheese, tomato, lettuce, topBun]
+                        levelIngredients.level1.forEach(element => {
+                            burg.removeChild(element)
+                        });
+                        console.log(levelIngredients.level1)
                         
                         startButton.style.display = "inline-block";
-                        startButton.innerHTML = "You got the order wrong!<br>Start Again"
 
                     }
                 }
