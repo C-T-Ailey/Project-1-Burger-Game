@@ -10,9 +10,11 @@ html, body {
     font-family: 'Lobster', cursive;
     font-weight: bolder;
     color: orange;
-    text-shadow: 2px 2px rgb(118, 17, 17)
+    text-shadow: 2px 2px rgb(118, 17, 17);
+    
 }
 #titleTo{
+    
     font-size: 36px;
 }
 
@@ -31,13 +33,22 @@ html, body {
     -1px  0   0 #FFF;
 }
 
+#h2p h2 {
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
 #rules{
-    font-family: 'Jost', sans-serif;
-    font-size: 18px;
+    font-family: 'Lobster', sans-serif;
+    font-size: 20px;
     text-align: center;
-    font-weight: bold;
+    font-weight: bolder;
     margin: 0 10px 0px 10px;
-    color: black;
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid black;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
     text-shadow:
     -1px -1px 0 #FFF,
      0   -1px 0 #FFF,
@@ -54,10 +65,10 @@ html, body {
     height: 100%;
     left: 0;
     top: 0;
-    background-image: url(../images/checkerboard.png);
+    background-image: url(../images/even_darker_checkerboard.png);
     background-size: contain;
-    border: 3px solid red;
-    background-color: lightblue;
+    border: 3px solid rgb(210, 98, 0);
+    background-color: rgb(158, 0, 0);
     position: absolute;
 }
 
@@ -67,6 +78,8 @@ html, body {
     background-color: gray;
     position: absolute;
     bottom: 0;
+    background-image: url(../images/PlywoodPainted0010_1_download600.jpeg);
+    box-shadow:inset 0px 0px 0px 5px rgb(110, 68, 35);
 }
 
 #startDiv {
@@ -76,8 +89,11 @@ html, body {
 }
 
 #stButton {
+    font-family: "Lobster", cursive;
+    font-size: 20px;
     width: 200px;
     height: 50px;
+    
 }
 
 #orderUp {
@@ -85,8 +101,8 @@ html, body {
     width: 15%;
     height: 100%;
     margin-left: 85%;
-    background-color: red;
-    background-image: url(../images/checkerboard.png);
+    background-color: rgb(145, 0, 0);
+    background-image: url(../images/even_darker_checkerboard.png);
     background-size: contain;
     border: 3px solid rgb(239, 165, 18);
     border-radius: 5px;
@@ -95,11 +111,23 @@ html, body {
 }
 
 #correct {
-    position: absolute;
-    top: 15%;
-    margin-left: 20px;
-    color: orange;
-    text-shadow: 2px 2px rgb(118, 17, 17);
+    position: relative;
+    font-size: x-large;
+    top: 5%;
+    margin-left: 5%;
+    color: rgb(0, 0, 0);
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid black;
+    border-radius: 5px;
+    text-shadow: 
+    -1px -1px 0 rgb(255, 255, 255),
+    0   -1px 0 rgb(255, 255, 255),
+    1px -1px 0 #FFF,
+    1px  0   0 #FFF,
+    1px  1px 0 #FFF,
+    0    1px 0 #FFF,
+   -1px  1px 0 #FFF,
+   -1px  0   0 #FFF;
 }
 
 #preview {
@@ -109,6 +137,7 @@ html, body {
     position: absolute;
     right: 5px;
     top: 5px;
+    background-color: white;
 }
 
 #preview img {
@@ -135,6 +164,9 @@ html, body {
     width: 100%;
     z-index: -1;
     background-color: transparent;
+    background-image: url(../images/bg_md.png);
+    background-size:cover;
+    
 }
 
 #burger {
@@ -160,9 +192,10 @@ html, body {
 .pipes div {
     display: flex;
     justify-content: center;
-    background-color: green;
+    background-color: transparent;
     width: 120px;
     text-align: center;
+    background-image: url(../images/pipe.png);
 }
 
 #previewBottom {
@@ -179,7 +212,7 @@ html, body {
     width: 90px;
     top: 105px;
     margin-left: 30px;
-    background-color: rgb(50, 32, 20);
+    background-color:rgb(81, 47, 25);
 }
 #previewCheese {
     position: relative;
