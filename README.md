@@ -77,7 +77,7 @@ function moveBurg(e) {
  
   2. and `areEqual`, as it was the function which ultimately signified my breakthrough in establishing the win condition for the game by comparing the player and goal arrays:
  
- '''function areEqual(array1, array2) {
+ ```function areEqual(array1, array2) {
     if (array1.length === array2.length) {
         return array1.every((element, index) => {
             elementClass = element.getAttribute("class");
@@ -90,4 +90,4 @@ function moveBurg(e) {
     } 
     return false;
   }
-'''
+```
