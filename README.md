@@ -72,7 +72,8 @@ function moveBurg(e) {
     else if ((e.keyCode == '37' || e.keyCode == '39') && (startPos === 0 || startPos === 3)){
         console.log("You're at the end of the counter! You'll drop the burger!")
     }
-}```
+}
+```
  
   2. and `areEqual`, as it was the function which ultimately signified my breakthrough in establishing the win condition for the game by comparing the player and goal arrays:
  
@@ -88,4 +89,5 @@ function moveBurg(e) {
       });
     } 
     return false;
-  }'''
+  }
+'''
