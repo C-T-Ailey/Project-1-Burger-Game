@@ -3,11 +3,60 @@ html, body {
     height: 100%; 
     overflow: hidden}
 
+#title{
+    text-align: center;
+    font-size: 30px;
+    margin-top:100px;
+    font-family: 'Lobster', cursive;
+    font-weight: bolder;
+    color: orange;
+    text-shadow: 2px 2px rgb(118, 17, 17)
+}
+#titleTo{
+    font-size: 36px;
+}
+
+#h2p{
+    text-align: center;
+    text-decoration: underline;
+    font-family: 'Lobster', cursive;
+    text-shadow:
+    -1px -1px 0 #FFF,
+     0   -1px 0 #FFF,
+     1px -1px 0 #FFF,
+     1px  0   0 #FFF,
+     1px  1px 0 #FFF,
+     0    1px 0 #FFF,
+    -1px  1px 0 #FFF,
+    -1px  0   0 #FFF;
+}
+
+#rules{
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    margin: 0 10px 0px 10px;
+    color: black;
+    text-shadow:
+    -1px -1px 0 #FFF,
+     0   -1px 0 #FFF,
+     1px -1px 0 #FFF,
+     1px  0   0 #FFF,
+     1px  1px 0 #FFF,
+     0    1px 0 #FFF,
+    -1px  1px 0 #FFF,
+    -1px  0   0 #FFF;
+}
+
 #leftBar {
-    width: 200px;
+    width: 250px;
     height: 100%;
     left: 0;
     top: 0;
+    background-image: url(../images/checkerboard.png);
+    background-size: contain;
+    border: 3px solid red;
     background-color: lightblue;
     position: absolute;
 }
@@ -22,8 +71,8 @@ html, body {
 
 #startDiv {
     position: absolute;
-    left: 45%;
-    top: 45%;
+    left: 43%;
+    top: 50%;
 }
 
 #stButton {
@@ -32,23 +81,25 @@ html, body {
 }
 
 #orderUp {
+    font-family: 'Lobster', cursive;
     width: 15%;
     height: 100%;
-    background-color: yellow;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-#orderUp button {
-    margin-top: 8%;
-    margin-left: 23%;
+    margin-left: 85%;
     background-color: red;
-    border: 3px solid crimson;
-    box-shadow: 0px 3px black;
+    background-image: url(../images/checkerboard.png);
+    background-size: contain;
+    border: 3px solid rgb(239, 165, 18);
     border-radius: 5px;
     padding: 20px 20px;
     font-size: 18px;
+}
+
+#correct {
+    position: absolute;
+    top: 15%;
+    margin-left: 20px;
+    color: orange;
+    text-shadow: 2px 2px rgb(118, 17, 17);
 }
 
 #preview {
