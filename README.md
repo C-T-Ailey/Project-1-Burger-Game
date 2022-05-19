@@ -56,8 +56,9 @@
 * The two functions I'm the most pleased with are:
   1. `moveBurg`, as it was the first breakthrough I had in developing the game's core mechanics:
  
- ```document.onkeydown = moveBurg;
-function moveBurg(e) {
+ ```javascript
+ document.onkeydown = moveBurg;
+ function moveBurg(e) {
     e = e || window.event;
     if (e.keyCode == '37' && startPos != 0) {
         // left arrow
@@ -77,7 +78,8 @@ function moveBurg(e) {
  
   2. and `areEqual`, as it was the function which ultimately signified my breakthrough in establishing the win condition for the game by comparing the player and goal arrays:
  
- ```function areEqual(array1, array2) {
+ ```javascript
+ function areEqual(array1, array2) {
     if (array1.length === array2.length) {
         return array1.every((element, index) => {
             elementClass = element.getAttribute("class");
