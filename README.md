@@ -48,15 +48,15 @@
 
 ### <ins>Solving for the Win</ins>
 * The win condition was ultimately achieved by establishing three things:
-  1. An array ('burgArr') tracking the burger in the process of construction by the player, to which each caught ingredient was pushed;
-  2. A pre-established array within an object ('target.level1') containing all the ingredients required by the player to win, in the order required _to_ win;
-  3. A function which would check the class of each element in 'burgArr' and 'target.level1', check if both arrays were in the same order, and if so, register the win condition.
+  1. An array (`burgArr`) tracking the burger in the process of construction by the player, to which each caught ingredient was pushed;
+  2. A pre-established array within an object (`target.level1`) containing all the ingredients required by the player to win, in the order required _to_ win;
+  3. A function which would check the class of each element in `burgArr` and `target.level1`, check if both arrays were in the same order, and if so, register the win condition.
 
 ### <ins>Favourite Functions</ins>
 * The two functions I'm the most pleased with are:
-  1. 'moveBurg', as it was the first breakthrough I had in developing the game's core mechanics:
+  1. `moveBurg`, as it was the first breakthrough I had in developing the game's core mechanics:
  
-'''document.onkeydown = moveBurg;
+ ```document.onkeydown = moveBurg;
 function moveBurg(e) {
     e = e || window.event;
     if (e.keyCode == '37' && startPos != 0) {
@@ -72,11 +72,11 @@ function moveBurg(e) {
     else if ((e.keyCode == '37' || e.keyCode == '39') && (startPos === 0 || startPos === 3)){
         console.log("You're at the end of the counter! You'll drop the burger!")
     }
-}'''
+}```
  
-  2. and 'areEqual', as it was the function which ultimately signified my breakthrough in establishing the win condition for the game by comparing the player and goal arrays:
+  2. and `areEqual`, as it was the function which ultimately signified my breakthrough in establishing the win condition for the game by comparing the player and goal arrays:
  
-'''function areEqual(array1, array2) {
+ '''function areEqual(array1, array2) {
     if (array1.length === array2.length) {
         return array1.every((element, index) => {
             elementClass = element.getAttribute("class");
