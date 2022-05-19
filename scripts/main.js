@@ -319,7 +319,7 @@ function startGame(){
                     burgArr = [bottomBun];
                     //  restock the level's ingredients array,
                     restock()
-                    burg.style.backgroundImage = "url(../images/burgbg.png)";
+                    burg.style.backgroundImage = "url(images/burgbg.png)";
                     burg.style.backgroundSize = "cover";
 
                     //  establish how many child elements are present in the burger div,
