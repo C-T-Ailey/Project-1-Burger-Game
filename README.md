@@ -1,5 +1,5 @@
 # Project 1: Burger Builder
-## "Welcome to Burger Monarch, may I take your order?"
+## "Welcome to Hamburger Monarch, may I take your order?"
 
 ### <ins>Technologies Used</ins>
 * HTML
