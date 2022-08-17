@@ -3,6 +3,8 @@
 
 Deployed App on Github: [Welcome to Hamburger Monarch](https://c-t-ailey.github.io/Project-1-Burger-Game/)
 
+![game screenshot](https://i.imgur.com/PIkRryc.png)
+
 ### <ins>Technologies Used</ins>
 * HTML
 * CSS
