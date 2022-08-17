@@ -10,7 +10,8 @@ Deployed App on Github: [Welcome to Hamburger Monarch](https://c-t-ailey.github.
 * Plain Javascript
 
 ### <ins>Wireframes and User Stories</ins>
-[Wireframe concept and game plan](https://i.imgur.com/TzkpGB7.jpg)
+Wireframe concept and game plan
+![Wireframe and game plan](https://i.imgur.com/TzkpGB7.jpg)
 
 * User Stories
   * As a new player, I want to see the rules so I can understand how to play before I begin.
