@@ -1,6 +1,8 @@
 # Project 1: Burger Builder
 ## "Welcome to Hamburger Monarch, may I take your order?"
 
+Deployed App on Github: [Welcome to Hamburger Monarch](https://c-t-ailey.github.io/Project-1-Burger-Game/)
+
 ### <ins>Technologies Used</ins>
 * HTML
 * CSS
@@ -8,7 +10,8 @@
 * Plain Javascript
 
 ### <ins>Wireframes and User Stories</ins>
-[Wireframe concept and game plan](https://raw.git.generalassemb.ly/cailey90/Project-1-Burger-Game/master/Burger%20Game%20Wireframe%2BConcept.jpg?token=AAAKQEI5YRB5D2HI6E4SWQ3CR74KI)
+[Wireframe concept and game plan](https://i.imgur.com/TzkpGB7.jpg)
+
 * User Stories
   * As a new player, I want to see the rules so I can understand how to play before I begin.
   * As a new player, I want to click a button so I can begin the game when I'm ready.
