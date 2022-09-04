@@ -2,7 +2,7 @@
 
 ### Deployed App: https://c-t-ailey.github.io/Project-1-Burger-Game/
 
-![burgermonarch](https://i.imgur.com/ZqU9Hkj.gif)
+![burgermonarch](https://i.imgur.com/Va1QakM.png)
 
 #### Table of Contents
 * Introduction
