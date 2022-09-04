@@ -163,9 +163,9 @@ function areEqual(array1, array2) {
 The only identified issue in the current iteration of the game is that the falling ingredients do not animate smoothly on every screen. Lower quality displays appear blurred and “stuttery”; a better means of animating them may be required to rectify this.
 
 #### Future Inclusions and Improvements
-The first concept I intend to implement in future is my original plan of new, increasingly complex burgers for the player to make in higher levels.
-I would also replace the styled div elements used to represent burger ingredients with custom-made, more aesthetically-pleasing resources.
-I would like to explore alternative means of animating the falling ingredients to eliminate the poor appearance of the animation on lower quality displays.
+* The first concept I intend to implement in future is my original plan of new, increasingly complex burgers for the player to make in higher levels.
+* I would also replace the styled div elements used to represent burger ingredients with custom-made, more aesthetically-pleasing resources.
+* I would like to explore alternative means of animating the falling ingredients to eliminate the poor appearance of the animation on lower quality displays.
 
 #### Key Learnings
 As my first project as part of General Assembly’s Software Engineering Immersive, it also represented the first time I was required to plan and develop a full application on a fixed deadline. My main takeaway from the experience was just how important it is to have a clear vision and firm plan for your work; I dread to think how much more difficult the experience would have been if I hadn’t solidified the concept as much before beginning to build the application.
