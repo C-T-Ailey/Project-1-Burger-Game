@@ -2,6 +2,8 @@
 
 ### Deployed App: https://c-t-ailey.github.io/Project-1-Burger-Game/
 
+![burgermonarch](https://i.imgur.com/ZqU9Hkj.gif)
+
 #### Table of Contents
 * Introduction
   * Brief and Requirements
@@ -37,8 +39,6 @@
 #### Project Overview
 
 “Welcome to Hamburger Monarch” is a web-based, arcade-style game inspired by the cooking-themed minigames present in various video games. The player starts with only the bottom bun of their burger and a preview of their expected final product, with ingredients falling randomly from above as the player attempts to catch them in the correct order. Upon completion, the player will progress a level, and the ingredients will begin to fall faster. If they stack their ingredients incorrectly, they will lose the game and be prompted to start again from Level 1.
-
-![burgermonarch](https://i.imgur.com/ZqU9Hkj.gif)
 
 #### Contributors
 This project was completed as a solo assignment. 
