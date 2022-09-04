@@ -109,7 +109,7 @@ The rest of the day was dedicated to CSS and sourcing some appropriately fast fo
 
 Of all the code solutions I uncovered in the process of completing this project, among the first to feel like a real success was the moveBurg function. This function was virtually complete by the end of Day 1, but as it was the first piece of interactivity to be implemented, it represented the moment where the game started taking shape.
 
-```
+```javascript
 document.onkeydown = moveBurg;
 function moveBurg(e) {
     e = e || window.event;
@@ -133,7 +133,7 @@ function moveBurg(e) {
 
 The other piece of code to stand out from my experience was the areEqual function, which takes two arrays of HTML elements (one representing the burger constructed by the player, the other representing the target for the level) as arguments and checking to see if their contents and order are identical. This function represented the landmark of solving the win condition, and ultimately tied the project together as a real, viable game.
 
-```
+```javascript
 function areEqual(array1, array2) {
     if (array1.length === array2.length) {
         return array1.every((element, index) => {
