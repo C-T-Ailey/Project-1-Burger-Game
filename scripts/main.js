@@ -58,7 +58,7 @@ burg.style.left = locArr[startPos]+"px";
 const patty = document.createElement("div");
 const patty2 = document.createElement("div");
 const patty3 = document.createElement("div");
-patties = [patty, patty2, patty3];
+let patties = [patty, patty2, patty3];
 patty.setAttribute("id","patty");
 patties.forEach(element => {
     element.setAttribute("class","patty");
@@ -74,7 +74,7 @@ patties.forEach(element => {
 const tomato = document.createElement("div");
 const tomato2 = document.createElement("div");
 const tomato3 = document.createElement("div");
-tomatoes = [tomato, tomato2, tomato3];
+let tomatoes = [tomato, tomato2, tomato3];
 tomato.setAttribute("id","tomato");
 tomatoes.forEach(element =>{
     element.setAttribute("class", "tomato");
@@ -90,7 +90,7 @@ tomatoes.forEach(element =>{
 const cheese = document.createElement("div");
 const cheese2 = document.createElement("div");
 const cheese3 = document.createElement("div");
-cheeses = [cheese, cheese2, cheese3];
+let cheeses = [cheese, cheese2, cheese3];
 cheese.setAttribute("id","cheese");
 cheeses.forEach(element => {
     element.setAttribute("class", "cheese")
@@ -106,7 +106,7 @@ cheeses.forEach(element => {
 const lettuce = document.createElement("div");
 const lettuce2 = document.createElement("div");
 const lettuce3 = document.createElement("div");
-lettuces = [lettuce, lettuce2, lettuce3]
+let lettuces = [lettuce, lettuce2, lettuce3]
 lettuce.setAttribute("id","lettuce");
 lettuces.forEach(element => {
     element.setAttribute("class", "lettuce")
@@ -121,7 +121,7 @@ lettuces.forEach(element => {
 
 const topBun = document.createElement("div");
 const topBun2 = document.createElement("div");
-topBuns = [topBun, topBun2]
+let topBuns = [topBun, topBun2]
 topBun.setAttribute("id","topBun");
 topBuns.forEach(element => {
     element.setAttribute("class", "topBun")
@@ -154,7 +154,7 @@ const target = {
 }
 
 //  The array used to track the player's current stack of ingredients
-burgArr = [bottomBun]
+let burgArr = [bottomBun]
 
 //  Enables the player to use the L+R keyboard arrows to move their burger
 document.onkeydown = moveBurg;
